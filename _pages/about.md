@@ -6,7 +6,7 @@ permalink: /
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: landing_page.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>555 your office number</p>
@@ -26,14 +26,11 @@ latest_posts:
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
-# Coburg Autonomous Systems Lab
 
-## Mission
 The mission of the **Coburg Autonomous Systems Lab** is to accelerate the evolution of autonomous intelligence by unifying simulation, scaled RC platforms, and full-scale vehicles into a single deployment pipeline. 
 
 We specialize in **Reinforcement Learning (RL)** and **Machine Learning** frameworks that don't just solve mathematical problems, but thrive in the friction and unpredictability of the physical world. By validating complex algorithms in scaled environments first, we transform theoretical autonomy into **rugged, road-ready engineering**.
 
-## Vision
 To be the premier proving ground for **embodied AI**, where the safety and capability of the next generation’s self-driving vehicles are solved at scale before they ever touch the public highway.
 
 ## Motto
