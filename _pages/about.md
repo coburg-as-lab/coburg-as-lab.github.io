@@ -6,7 +6,7 @@ permalink: /
 
 profile:
   align: right
-  image: landing_page.jpg
+  image: landing_page_car.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Lucas-Cranach-Campus</p>
