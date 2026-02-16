@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-02-09'
+  last_updated: '2026-02-16'
 papers:
   3A6LKtAAAAAJ:0EnyYjriUFMC:
     citations: 3
@@ -38,11 +38,11 @@ papers:
     title: Cavitation damage detection through acoustic emissions
     year: '2019'
   3A6LKtAAAAAJ:UebtZRa9Y70C:
-    citations: 41
+    citations: 43
     title: Can you text what is happening? Integrating pre-trained language encoders into trajectory prediction models for autonomous driving
     year: '2023'
   3A6LKtAAAAAJ:W7OEmFMy1HYC:
-    citations: 15
+    citations: 16
     title: Differentiable Implicit Layers
     year: '2020'
   3A6LKtAAAAAJ:WF5omc3nYNoC:
@@ -86,7 +86,7 @@ papers:
     title: 'Dealing with Limited Access to Data: Comparison of Deep Learning Approaches'
     year: '2019'
   3A6LKtAAAAAJ:roLk4NBRz8UC:
-    citations: 9
+    citations: 8
     title: A Deterministic Approximation to Neural SDEs
     year: '2022'
   3A6LKtAAAAAJ:u-x6o8ySG0sC:
