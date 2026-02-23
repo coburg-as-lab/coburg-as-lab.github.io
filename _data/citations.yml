@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-02-16'
+  last_updated: '2026-02-23'
 papers:
   3A6LKtAAAAAJ:0EnyYjriUFMC:
     citations: 3
@@ -66,9 +66,13 @@ papers:
     title: Model-predictive control of a technical system
     year: '2025'
   3A6LKtAAAAAJ:_FxGoFyzp5QC:
-    citations: 4
+    citations: 5
     title: Making time-series predictions of a computer-controlled system
     year: '2024'
+  3A6LKtAAAAAJ:_kc_bZDykSQC:
+    citations: 0
+    title: Method for ascertaining potential trajectories when controlling a robot device
+    year: '2026'
   3A6LKtAAAAAJ:d1gkVwhDpl0C:
     citations: 0
     title: Einsatz von Beamforming-Algorithmen im Ultraschallbereich zur Lokalisation des Blasenzerfalls
