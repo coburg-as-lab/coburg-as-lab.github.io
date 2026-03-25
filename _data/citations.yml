@@ -1,12 +1,12 @@
 metadata:
-  last_updated: '2026-03-04'
+  last_updated: '2026-03-25'
 papers:
   3A6LKtAAAAAJ:0EnyYjriUFMC:
     citations: 3
     title: Detection and level estimation of cavitation in hydraulic turbines with convolutional neural networks
     year: '2018'
   3A6LKtAAAAAJ:3fE2CSJIrl8C:
-    citations: 4
+    citations: 5
     title: Motion Forecasting via Model-Based Risk Minimization
     year: '2024'
   3A6LKtAAAAAJ:8k81kl-MbHgC:
@@ -18,7 +18,7 @@ papers:
     title: Differential Bayesian Neural Nets
     year: '2019'
   3A6LKtAAAAAJ:LkGwnXOMwfcC:
-    citations: 0
+    citations: 1
     title: Device and method for training the neural drift network and the neural diffusion network of a neural stochastic differential equation
     year: '2022'
   3A6LKtAAAAAJ:MXK_kJrjxJIC:
@@ -38,7 +38,7 @@ papers:
     title: Cavitation damage detection through acoustic emissions
     year: '2019'
   3A6LKtAAAAAJ:UebtZRa9Y70C:
-    citations: 44
+    citations: 45
     title: Can you text what is happening? Integrating pre-trained language encoders into trajectory prediction models for autonomous driving
     year: '2023'
   3A6LKtAAAAAJ:W7OEmFMy1HYC:
@@ -66,7 +66,7 @@ papers:
     title: Model-predictive control of a technical system
     year: '2025'
   3A6LKtAAAAAJ:_FxGoFyzp5QC:
-    citations: 5
+    citations: 6
     title: Making time-series predictions of a computer-controlled system
     year: '2024'
   3A6LKtAAAAAJ:_kc_bZDykSQC:
@@ -82,7 +82,7 @@ papers:
     title: Sampling-Free Probabilistic Deep State-Space Models
     year: '2023'
   3A6LKtAAAAAJ:kNdYIx-mwKoC:
-    citations: 8
+    citations: 9
     title: 'Stochasticity in Motion: An Information-Theoretic Approach to Trajectory Prediction'
     year: '2024'
   3A6LKtAAAAAJ:qjMakFHDy7sC:
@@ -90,7 +90,7 @@ papers:
     title: 'Dealing with Limited Access to Data: Comparison of Deep Learning Approaches'
     year: '2019'
   3A6LKtAAAAAJ:roLk4NBRz8UC:
-    citations: 8
+    citations: 9
     title: A Deterministic Approximation to Neural SDEs
     year: '2022'
   3A6LKtAAAAAJ:u-x6o8ySG0sC:
@@ -102,7 +102,7 @@ papers:
     title: 'A system of equations: Mathematics lessons in classical literature'
     year: '2015'
   3A6LKtAAAAAJ:ufrVoPGSRksC:
-    citations: 1
+    citations: 3
     title: Predicting a state of a computer-controlled entity
     year: '2021'
   3A6LKtAAAAAJ:zYLM7Y9cAGgC:
