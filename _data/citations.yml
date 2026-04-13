@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-03-25'
+  last_updated: '2026-04-13'
 papers:
   3A6LKtAAAAAJ:0EnyYjriUFMC:
     citations: 3
@@ -9,6 +9,10 @@ papers:
     citations: 5
     title: Motion Forecasting via Model-Based Risk Minimization
     year: '2024'
+  3A6LKtAAAAAJ:4TOpqqG69KYC:
+    citations: 0
+    title: 'Uncertainty Matters: Structured Probabilistic Online Mapping for Motion Prediction in Autonomous Driving'
+    year: '2026'
   3A6LKtAAAAAJ:8k81kl-MbHgC:
     citations: 0
     title: Computer-implemented method for predicting a behavior of agents in a dynamic system with a multiplicity of interacting agents
@@ -26,7 +30,7 @@ papers:
     title: Deterministic Approximations for Deep State-Space Models
     year: '2023'
   3A6LKtAAAAAJ:Se3iqnhoufwC:
-    citations: 12
+    citations: 13
     title: Cheap and Deterministic Inference for Deep State-Space Models of Interacting Dynamical Systems
     year: '2023'
   3A6LKtAAAAAJ:ULOm3_A8WrAC:
@@ -94,7 +98,7 @@ papers:
     title: A Deterministic Approximation to Neural SDEs
     year: '2022'
   3A6LKtAAAAAJ:u-x6o8ySG0sC:
-    citations: 9
+    citations: 10
     title: Building Robust Classifiers with Generative Adversarial Networks for Detecting Cavitation in Hydraulic Turbines.
     year: '2018'
   3A6LKtAAAAAJ:u5HHmVD_uO8C:
