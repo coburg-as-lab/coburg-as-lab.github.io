@@ -1,11 +1,918 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coburg Autonomous Systems Lab</title>
-  </head>
-  <body>
-    <h1>Hello World</h1>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autonomous Systems Lab — Hochschule Coburg</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0c10;
+  --bg-card: #12151c;
+  --bg-card-hover: #181c26;
+  --accent: #e85d2c;
+  --accent-light: #ff7a47;
+  --accent-glow: rgba(232, 93, 44, 0.15);
+  --text: #e8e6e3;
+  --text-muted: #8a8d96;
+  --text-dim: #5a5d66;
+  --border: rgba(255,255,255,0.06);
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* --- NAV --- */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  backdrop-filter: blur(20px);
+  background: rgba(10,12,16,0.8);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+}
+nav .nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+nav .logo {
+  font-family: var(--font-mono);
+  font-weight: 700; font-size: 0.9rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+nav .logo span { color: var(--text-muted); font-weight: 400; }
+nav ul { list-style: none; display: flex; gap: 2rem; }
+nav ul li a {
+  color: var(--text-muted); text-decoration: none;
+  font-size: 0.85rem; font-weight: 500;
+  transition: color 0.2s;
+  letter-spacing: 0.5px;
+}
+nav ul li a:hover { color: var(--text); }
+
+/* --- HERO --- */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  padding: 6rem 2rem 4rem;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(232,93,44,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(232,93,44,0.05) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+}
+.hero-content {
+  position: relative; z-index: 1;
+  max-width: 900px; text-align: center;
+}
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; color: var(--accent);
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -1px;
+  opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: 1.15rem; color: var(--text-muted);
+  max-width: 620px; margin: 1.5rem auto 2.5rem;
+  opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+}
+.hero-cta {
+  display: inline-flex; gap: 1rem;
+  opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+}
+.btn {
+  display: inline-block; padding: 0.85rem 2rem;
+  border-radius: 6px; font-size: 0.9rem; font-weight: 600;
+  text-decoration: none; transition: all 0.25s;
+  cursor: pointer; border: none;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+  box-shadow: 0 4px 20px rgba(232,93,44,0.3);
+}
+.btn-primary:hover {
+  background: var(--accent-light);
+  box-shadow: 0 6px 30px rgba(232,93,44,0.4);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  background: transparent; color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+
+/* --- SECTIONS --- */
+section { padding: 6rem 2rem; }
+.container { max-width: 1200px; margin: 0 auto; }
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; color: var(--accent);
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700; letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+}
+.section-desc {
+  color: var(--text-muted); font-size: 1.05rem;
+  max-width: 600px; margin-bottom: 3rem;
+}
+
+/* --- FACILITY --- */
+.facility-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.facility-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.facility-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(232,93,44,0.2);
+  transform: translateY(-2px);
+}
+.facility-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.facility-card:hover::after { opacity: 1; }
+.card-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--accent-glow);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.25rem;
+  font-size: 1.3rem;
+}
+.facility-card h3 {
+  font-size: 1.1rem; font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.facility-card p {
+  color: var(--text-muted); font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* --- MODEL CAR SPECS --- */
+.specs-section {
+  background: linear-gradient(180deg, rgba(232,93,44,0.03) 0%, transparent 60%);
+}
+.specs-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.specs-visual {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 400px;
+}
+.car-ascii {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  line-height: 1.35;
+  color: var(--accent);
+  white-space: pre;
+  text-align: center;
+  opacity: 0.85;
+}
+.specs-visual .dim-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-top: 1.5rem;
+  text-align: center;
+}
+.spec-groups { display: flex; flex-direction: column; gap: 2rem; }
+.spec-group h3 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; color: var(--accent);
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.spec-row {
+  display: flex; justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.spec-row .label { color: var(--text-muted); font-size: 0.9rem; }
+.spec-row .value { font-weight: 600; font-size: 0.9rem; font-family: var(--font-mono); }
+
+/* --- ARCHITECTURE --- */
+.arch-pipeline {
+  display: flex; gap: 0; overflow-x: auto;
+  padding: 1rem 0 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--bg-card);
+}
+.arch-stage {
+  flex: 0 0 auto;
+  min-width: 200px;
+  position: relative;
+  text-align: center;
+}
+.arch-stage-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem 1.25rem;
+  margin: 0 0.5rem;
+  transition: all 0.3s;
+}
+.arch-stage-box:hover {
+  border-color: rgba(232,93,44,0.3);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+.arch-stage-box h4 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 2px;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.arch-stage-box ul {
+  list-style: none; text-align: left;
+}
+.arch-stage-box ul li {
+  font-size: 0.8rem; color: var(--text-muted);
+  padding: 0.25rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+.arch-stage-box ul li::before {
+  content: '›';
+  position: absolute; left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.arch-arrow {
+  display: flex; align-items: center; justify-content: center;
+  min-width: 40px;
+  color: var(--text-dim);
+  font-size: 1.2rem;
+}
+
+/* --- LUCCA --- */
+.lucca-section { border-top: 1px solid var(--border); }
+.lucca-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.lucca-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+.lucca-item:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(232,93,44,0.15);
+}
+.lucca-item h4 {
+  font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.lucca-item p {
+  color: var(--text-muted); font-size: 0.85rem;
+}
+.lucca-item .tech-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  background: var(--accent-glow);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  margin-right: 0.3rem;
+}
+
+/* --- RESEARCH --- */
+.research-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.research-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s;
+}
+.research-card:hover {
+  border-color: rgba(232,93,44,0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.research-card .rc-number {
+  font-family: var(--font-mono);
+  font-size: 3rem; font-weight: 700;
+  color: rgba(232,93,44,0.1);
+  position: absolute; top: 1rem; right: 1.5rem;
+}
+.research-card h3 {
+  font-size: 1.2rem; font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.research-card p {
+  color: var(--text-muted); font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* --- TEST CASES --- */
+.test-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.test-col {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2rem;
+}
+.test-col h3 {
+  font-size: 1rem; font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+.test-col .test-subtitle {
+  color: var(--text-dim); font-size: 0.8rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-mono);
+}
+.test-item {
+  display: flex; gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  align-items: flex-start;
+}
+.test-item:last-child { border-bottom: none; }
+.test-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  margin-top: 0.55rem;
+  flex-shrink: 0;
+}
+.test-item span {
+  color: var(--text-muted); font-size: 0.88rem;
+}
+
+/* --- TECH STACK --- */
+.stack-row {
+  display: flex; flex-wrap: wrap; gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.stack-chip {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.stack-chip:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+/* --- COLLABORATE --- */
+.collab-section {
+  background: linear-gradient(180deg, transparent 0%, rgba(232,93,44,0.04) 100%);
+}
+.collab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+.collab-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s;
+}
+.collab-card:hover {
+  border-color: rgba(232,93,44,0.2);
+  transform: translateY(-2px);
+}
+.collab-card .collab-emoji {
+  font-size: 1.5rem; margin-bottom: 1rem;
+  display: block;
+}
+.collab-card h3 {
+  font-size: 1rem; font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.collab-card p {
+  color: var(--text-muted); font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+/* --- STATS BAR --- */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 3rem 0;
+}
+.stat-item { text-align: center; }
+.stat-number {
+  font-family: var(--font-mono);
+  font-size: 2.2rem; font-weight: 700;
+  color: var(--accent);
+}
+.stat-label {
+  color: var(--text-dim); font-size: 0.8rem;
+  margin-top: 0.25rem;
+  letter-spacing: 0.5px;
+}
+
+/* --- FOOTER --- */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+footer p {
+  color: var(--text-dim); font-size: 0.8rem;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+/* --- ANIMATIONS --- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1; transform: translateY(0);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+  .specs-layout { grid-template-columns: 1fr; }
+  .research-cards { grid-template-columns: 1fr; }
+  .test-grid { grid-template-columns: 1fr; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  nav ul { display: none; }
+  .arch-pipeline { flex-direction: column; }
+  .arch-arrow { transform: rotate(90deg); min-height: 30px; }
+}
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2rem; }
+  section { padding: 4rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">ASL <span>— Hochschule Coburg</span></div>
+    <ul>
+      <li><a href="#facility">Facility</a></li>
+      <li><a href="#vehicle">Vehicle</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#lucca">LUCCA</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#collaborate">Collaborate</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Autonomous Systems Lab</div>
+    <h1>Where <em>autonomous driving</em> meets physical reality</h1>
+    <p class="hero-sub">A 1:6 scale model city for testing, validating, and breaking autonomous driving algorithms — safely, cheaply, and with real physics.</p>
+    <div class="hero-cta">
+      <a href="#facility" class="btn btn-primary">Explore the Lab</a>
+      <a href="#collaborate" class="btn btn-ghost">Partner With Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITY OVERVIEW -->
+<section id="facility">
+  <div class="container">
+    <div class="section-label reveal">01 — Facility</div>
+    <h2 class="section-title reveal">Research Facility</h2>
+    <p class="section-desc reveal">An 8m × 8m indoor model city with motion capture, traffic lights, and multiple autonomous vehicles operating simultaneously.</p>
+
+    <div class="facility-grid">
+      <div class="facility-card reveal">
+        <div class="card-icon">🏙️</div>
+        <h3>Safe Environment</h3>
+        <p>Test algorithms in a physical 1:6 scale model town — intersections, parking spots, and multi-lane roads with 83.2 cm road width and realistic markings.</p>
+      </div>
+      <div class="facility-card reveal">
+        <div class="card-icon">📡</div>
+        <h3>Flexible Data Gathering</h3>
+        <p>Combine onboard vehicle perception (RealSense D435, YDLidar G2) with global OptiTrack motion capture at 30 Hz for ground truth positioning.</p>
+      </div>
+      <div class="facility-card reveal">
+        <div class="card-icon">🎮</div>
+        <h3>Human-in-the-Loop</h3>
+        <p>Connect a full multi-monitor driving simulator for human steering and intervention — bridging automated and supervised driving research.</p>
+      </div>
+    </div>
+
+    <div class="stats-bar reveal">
+      <div class="stat-item">
+        <div class="stat-number">8×8m</div>
+        <div class="stat-label">Track Footprint</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1:6</div>
+        <div class="stat-label">Scale Factor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODEL CAR SPECS -->
+<section id="vehicle" class="specs-section">
+  <div class="container">
+    <div class="section-label reveal">02 — Vehicle Platform</div>
+    <h2 class="section-title reveal">Model Car</h2>
+    <p class="section-desc reveal">Purpose-built 1:6 scale autonomous vehicles with full sensor stacks, edge AI compute, and Ackermann steering.</p>
+
+    <div class="specs-layout reveal">
+      <div class="specs-visual">
+        <div class="car-ascii">
+          ╭─────────────────────╮
+          │     ┌─────────┐     │
+          │     │ RealSense│     │
+          │     │  D435    │     │
+          │     └─────────┘     │
+          │  ┌───────────────┐  │
+          │  │   Jetson Orin  │  │
+          │  │   AGX 64GB     │  │
+          │  └───────────────┘  │
+          │  ┌───┐     ┌───┐   │
+          │  │MCU│     │LiD│   │
+          │  └───┘     └───┘   │
+          │  ┌───────────────┐  │
+          │  │  BLDC Servo    │  │
+          │  │  EZRUN         │  │
+          │  └───────────────┘  │
+          ╰─────────────────────╯
+        </div>
+        <div class="dim-label">80 × 40 × 40 cm  ·  ~15 kg  ·  50 cm wheelbase</div>
+      </div>
+
+      <div class="spec-groups">
+        <div class="spec-group">
+          <h3>Dimensions</h3>
+          <div class="spec-row"><span class="label">Exterior (L×W×H)</span><span class="value">80×40×40 cm</span></div>
+          <div class="spec-row"><span class="label">Wheelbase</span><span class="value">50 cm</span></div>
+          <div class="spec-row"><span class="label">Track Width</span><span class="value">30 cm</span></div>
+          <div class="spec-row"><span class="label">Mass</span><span class="value">~15 kg</span></div>
+        </div>
+        <div class="spec-group">
+          <h3>Equipment</h3>
+          <div class="spec-row"><span class="label">Drive Motor</span><span class="value">BLDC EZRUN</span></div>
+          <div class="spec-row"><span class="label">Motor Controller</span><span class="value">EZRUN MAX8 G2</span></div>
+          <div class="spec-row"><span class="label">LiDAR</span><span class="value">YDLidar G2</span></div>
+          <div class="spec-row"><span class="label">Camera</span><span class="value">RealSense D435</span></div>
+          <div class="spec-row"><span class="label">Compute Unit</span><span class="value">Jetson Orin AGX 64GB</span></div>
+        </div>
+        <div class="spec-group">
+          <h3>Performance</h3>
+          <div class="spec-row"><span class="label">Max Speed</span><span class="value">10 m/s</span></div>
+          <div class="spec-row"><span class="label">Max Steering Angle</span><span class="value">30°</span></div>
+          <div class="spec-row"><span class="label">Control Interface</span><span class="value">ROS Ackermann</span></div>
+          <div class="spec-row"><span class="label">Speed Control</span><span class="value">PID (rear diff RPS)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="container">
+    <div class="section-label reveal">03 — Software</div>
+    <h2 class="section-title reveal">Architecture Pipeline</h2>
+    <p class="section-desc reveal">End-to-end ROS 2 Humble architecture spanning sensor input through actuation, with V2X communication and traffic light control.</p>
+
+    <div class="arch-pipeline reveal">
+      <div class="arch-stage">
+        <div class="arch-stage-box">
+          <h4>Sensors</h4>
+          <ul>
+            <li>RealSense D435</li>
+            <li>YDLidar G2</li>
+            <li>OptiTrack MoCap</li>
+            <li>Arduino Giga R1</li>
+          </ul>
+        </div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-stage">
+        <div class="arch-stage-box">
+          <h4>Sense</h4>
+          <ul>
+            <li>ICP Odometry</li>
+            <li>Object Detection</li>
+            <li>Car Description</li>
+            <li>ROS Deep Learning</li>
+          </ul>
+        </div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-stage">
+        <div class="arch-stage-box">
+          <h4>Plan</h4>
+          <ul>
+            <li>AD Localiser</li>
+            <li>Route Planner</li>
+            <li>Trajectory Planner</li>
+            <li>Traffic Signal Planner</li>
+          </ul>
+        </div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-stage">
+        <div class="arch-stage-box">
+          <h4>Act</h4>
+          <ul>
+            <li>V2X Publisher</li>
+            <li>Nav Bringup</li>
+            <li>Map Loader</li>
+            <li>SPaT / CAM Pub</li>
+          </ul>
+        </div>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-stage">
+        <div class="arch-stage-box">
+          <h4>Actuators</h4>
+          <ul>
+            <li>Steering Servo (PWM)</li>
+            <li>DC Motor (CAN)</li>
+            <li>Traffic Lights (GPIO)</li>
+            <li>RViz GUI</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="font-size:1.05rem; margin-top:3rem; margin-bottom:1rem;">Technology Stack</h3>
+    <div class="stack-row reveal">
+      <span class="stack-chip">ROS 2 Humble</span>
+      <span class="stack-chip">eProsima FastDDS</span>
+      <span class="stack-chip">Ubuntu 22.04</span>
+      <span class="stack-chip">JetPack 6.2</span>
+      <span class="stack-chip">PyTorch</span>
+      <span class="stack-chip">MOCAP4ROS2</span>
+      <span class="stack-chip">ETSI ITS Messages</span>
+      <span class="stack-chip">realsense2_camera</span>
+      <span class="stack-chip">ydlidar</span>
+      <span class="stack-chip">ros_deep_learning</span>
+      <span class="stack-chip">MQTT</span>
+      <span class="stack-chip">SSD-MobileNet-V2</span>
+    </div>
+  </div>
+</section>
+
+<!-- LUCCA -->
+<section id="lucca" class="lucca-section">
+  <div class="container">
+    <div class="section-label reveal">04 — Full-Scale Platform</div>
+    <h2 class="section-title reveal">LUCCA Vehicle</h2>
+    <p class="section-desc reveal">In addition to model-scale testing, the lab operates a full-size instrumented vehicle (eGolf) with 5G connectivity and multi-sensor perception.</p>
+
+    <div class="lucca-grid">
+      <div class="lucca-item reveal">
+        <h4>360° Reference LiDAR</h4>
+        <p>Ouster LiDAR mounted on roof rack providing full surround point cloud data for ground truth and perception.</p>
+        <span class="tech-tag">Ouster</span>
+      </div>
+      <div class="lucca-item reveal">
+        <h4>Teleoperation Cameras</h4>
+        <p>3× front-facing and 3× additional teleoperation cameras for remote monitoring and driving capabilities.</p>
+        <span class="tech-tag">6× Cameras</span>
+      </div>
+      <div class="lucca-item reveal">
+        <h4>Surround View</h4>
+        <p>4× surround view cameras providing 360° visual coverage around the vehicle via MediaGateway.</p>
+        <span class="tech-tag">4× SVCs</span>
+      </div>
+      <div class="lucca-item reveal">
+        <h4>Scala 2 LiDAR</h4>
+        <p>4× corner-mounted Scala 2 LiDAR sensors for near-field object detection and tracking.</p>
+        <span class="tech-tag">4× Scala 2</span>
+      </div>
+      <div class="lucca-item reveal">
+        <h4>5G Connectivity</h4>
+        <p>5G TCU with dedicated antennas enabling low-latency V2X communication and teleoperation links.</p>
+        <span class="tech-tag">5G TCU</span><span class="tech-tag">V2X</span>
+      </div>
+      <div class="lucca-item reveal">
+        <h4>Compute & Storage</h4>
+        <p>Rack-mounted computing system with dedicated storage array for real-time processing and data logging.</p>
+        <span class="tech-tag">BR-Converter</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH FOCUS -->
+<section id="research">
+  <div class="container">
+    <div class="section-label reveal">05 — Research Focus</div>
+    <h2 class="section-title reveal">What We Investigate</h2>
+    <p class="section-desc reveal">Three pillars of research — all validated in the physical safety of our model town.</p>
+
+    <div class="research-cards">
+      <div class="research-card reveal">
+        <div class="rc-number">01</div>
+        <h3>Sim2Real Transfer</h3>
+        <p>Closing the gap between high-performing simulations and real-world application. We use ground truth injection to bypass onboard sensors and test with "perfect" perception data, then progressively add real-world noise.</p>
+      </div>
+      <div class="research-card reveal">
+        <div class="rc-number">02</div>
+        <h3>Adversarial Safety</h3>
+        <p>Verifying the adversarial robustness of autonomous systems in real-life scenarios. From physical adversarial patches to sensor attacks — testing resilience where it matters.</p>
+      </div>
+      <div class="research-card reveal">
+        <div class="rc-number">03</div>
+        <h3>Planner Validation</h3>
+        <p>Moving beyond synthetic tests and open-loop replays to validate planning methods in practice. Real vehicles, real intersections, real edge cases.</p>
+      </div>
+    </div>
+
+</section>
+
+<!-- TEST CASES -->
+<section>
+  <div class="container">
+    <div class="section-label reveal">06 — Scenarios</div>
+    <h2 class="section-title reveal">What You Can Test Here</h2>
+    <p class="section-desc reveal">The model town enables scenarios that are impractical in both simulation and the real world.</p>
+
+    <div class="test-grid">
+      <div class="test-col reveal">
+        <h3>Hard to Simulate</h3>
+        <div class="test-subtitle">Physics & optics that break digital engines</div>
+        <div class="test-item"><div class="test-dot"></div><span>Actuator latency and physical inertia</span></div>
+        <div class="test-item"><div class="test-dot"></div><span>V2X signal corruption</span></div>
+        <div class="test-item"><div class="test-dot"></div><span>Surface grip loss — icy or oily surfaces</span></div>
+        <div class="test-item"><div class="test-dot"></div><span>Complex optics — reflections that mislead LiDAR and cameras</span></div>
+        <div class="test-item"><div class="test-dot"></div><span>Volumetric particles — smoke, dust, snow</span></div>
+        <div class="test-item"><div class="test-dot"></div><span>Sensor blinding — laser attacks and lens flares</span></div>
+      </div>
+      <div class="test-col reveal">
+        <h3>Too Dangerous for Real World</h3>
+        <div class="test-subtitle">Safety-critical edge cases at zero risk</div>
+        <div class="test-item"><div class="test-dot"></div><span>Unavoidable collision — "trolley problem" decision logic</span></div>
+        <div class="test-item"><div class="test-dot"></div><span>Critical hardware failure — sudden loss of steering/braking</span></div>
+        <div class="test-item"><div class="test-dot"></div><span>Severe infrastructure damage — potholes, road collapses</span></div>
+        <div class="test-item"><div class="test-dot"></div><span>Falling heavy cargo — dynamic hazards from other vehicles</span></div>
+        <div class="test-item"><div class="test-dot"></div><span>Multi-vehicle pileups — chain-reaction crash scenarios</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLABORATE -->
+<section id="collaborate" class="collab-section">
+  <div class="container">
+    <div class="section-label reveal">07 — Get Involved</div>
+    <h2 class="section-title reveal">Collaborate With Us</h2>
+    <p class="section-desc reveal">We're actively seeking partners from industry and academia. Here's how we can work together.</p>
+
+    <div class="collab-grid">
+      <div class="collab-card reveal">
+        <span class="collab-emoji">🔬</span>
+        <h3>Joint Research & PhDs</h3>
+        <p>Co-fund PhD candidates and drive joint research projects in autonomous driving, sim2real, and adversarial robustness.</p>
+      </div>
+      <div class="collab-card reveal">
+        <span class="collab-emoji">🤖</span>
+        <h3>Educational Sponsorship</h3>
+        <p>Support with hardware or funding for robots and the launch of our RoboRacer student competition team.</p>
+      </div>
+      <div class="collab-card reveal">
+        <span class="collab-emoji">🎤</span>
+        <h3>Guest Lectures</h3>
+        <p>Share your industry insights with our students. We welcome practitioners and domain experts.</p>
+      </div>
+      <div class="collab-card reveal">
+        <span class="collab-emoji">🏭</span>
+        <h3>Student Excursions</h3>
+        <p>Host our students for site visits and field trips to inspire the next generation of engineers.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top: 3rem;" class="reveal">
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">3 permanent lab engineers · Active research phase · Growing team</p>
+      <a href="mailto:andreas.look@hs-coburg.de" class="btn btn-primary">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>Autonomous Systems Lab · <a href="https://www.hs-coburg.de" target="_blank">Hochschule Coburg</a> · Prof. Dr. Andreas Look</p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Smooth nav highlight
+document.querySelectorAll('nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
 </html>
