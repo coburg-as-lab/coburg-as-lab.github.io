@@ -518,6 +518,84 @@ footer a { color: var(--accent); text-decoration: none; }
   opacity: 1; transform: translateY(0);
 }
 
+/* --- PHOTO COMPONENTS --- */
+.facility-photos {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.facility-photo {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.facility-photo img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  height: 300px;
+  opacity: 0.88;
+  transition: opacity 0.3s, transform 0.5s;
+}
+.facility-photo.sketch img {
+  object-fit: contain;
+  background: #f5f5f5;
+  padding: 1.5rem;
+  height: 300px;
+}
+.facility-photo:hover img { opacity: 1; transform: scale(1.02); }
+.facility-photo .photo-caption {
+  padding: 0.6rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.card-photo {
+  width: calc(100% + 4rem);
+  margin: -2rem -2rem 1.25rem;
+  overflow: hidden;
+  height: 180px;
+  border-radius: 12px 12px 0 0;
+}
+.card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.82;
+  transition: opacity 0.3s;
+}
+.facility-card:hover .card-photo img { opacity: 1; }
+
+.specs-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+.specs-visual {
+  padding: 0;
+  overflow: hidden;
+}
+.specs-visual .dim-label {
+  position: relative;
+  z-index: 1;
+  background: rgba(10,12,16,0.75);
+  backdrop-filter: blur(8px);
+  margin: 0;
+  padding: 0.75rem 1.5rem;
+  width: 100%;
+  border-top: 1px solid var(--border);
+}
+
 /* --- RESPONSIVE --- */
 @media (max-width: 900px) {
   .specs-layout { grid-template-columns: 1fr; }
@@ -527,6 +605,7 @@ footer a { color: var(--accent); text-decoration: none; }
   nav ul { display: none; }
   .arch-pipeline { flex-direction: column; }
   .arch-arrow { transform: rotate(90deg); min-height: 30px; }
+  .facility-photos { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .hero h1 { font-size: 2rem; }
@@ -574,17 +653,23 @@ footer a { color: var(--accent); text-decoration: none; }
 
     <div class="facility-grid">
       <div class="facility-card reveal">
-        <div class="card-icon">🏙️</div>
+        <div class="card-photo">
+          <img src="images/town.png" alt="Overhead view of the 8×8m model town">
+        </div>
         <h3>Safe Environment</h3>
         <p>Test algorithms in a physical 1:6 scale model town — intersections, parking spots, and multi-lane roads with 83.2 cm road width and realistic markings.</p>
       </div>
       <div class="facility-card reveal">
-        <div class="card-icon">📡</div>
+        <div class="card-photo">
+          <img src="images/car1.jpg" alt="1:6 scale model car with RealSense camera">
+        </div>
         <h3>Flexible Data Gathering</h3>
         <p>Combine onboard vehicle perception (RealSense D435, YDLidar G2) with global OptiTrack motion capture at 30 Hz for ground truth positioning.</p>
       </div>
       <div class="facility-card reveal">
-        <div class="card-icon">🎮</div>
+        <div class="card-photo">
+          <img src="images/seat.jpg" alt="Driving simulator with triple monitors and steering wheel">
+        </div>
         <h3>Human-in-the-Loop</h3>
         <p>Connect a full multi-monitor driving simulator for human steering and intervention — bridging automated and supervised driving research.</p>
       </div>
@@ -612,25 +697,7 @@ footer a { color: var(--accent); text-decoration: none; }
 
     <div class="specs-layout reveal">
       <div class="specs-visual">
-        <div class="car-ascii">
-          ╭─────────────────────╮
-          │     ┌─────────┐     │
-          │     │ RealSense│     │
-          │     │  D435    │     │
-          │     └─────────┘     │
-          │  ┌───────────────┐  │
-          │  │   Jetson Orin  │  │
-          │  │   AGX 64GB     │  │
-          │  └───────────────┘  │
-          │  ┌───┐     ┌───┐   │
-          │  │MCU│     │LiD│   │
-          │  └───┘     └───┘   │
-          │  ┌───────────────┐  │
-          │  │  BLDC Servo    │  │
-          │  │  EZRUN         │  │
-          │  └───────────────┘  │
-          ╰─────────────────────╯
-        </div>
+        <img src="images/car1.jpg" alt="1:6 scale autonomous model car with RealSense D435 camera on top, in the model town">
         <div class="dim-label">80 × 40 × 40 cm  ·  ~15 kg  ·  50 cm wheelbase</div>
       </div>
 
