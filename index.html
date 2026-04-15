@@ -218,26 +218,40 @@ section { padding: 6rem 2rem; }
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 2.5rem;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   min-height: 400px;
-}
-.car-ascii {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  line-height: 1.35;
-  color: var(--accent);
-  white-space: pre;
-  text-align: center;
-  opacity: 0.85;
 }
 .specs-visual .dim-label {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: var(--text-dim);
-  margin-top: 1.5rem;
-  text-align: center;
+  padding: 0.75rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: rgba(10,12,16,0.7);
+  backdrop-filter: blur(8px);
 }
+.car-gallery { display: flex; flex-direction: column; flex: 1; }
+.car-gallery-main { overflow: hidden; height: 250px; }
+.car-gallery-main img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.5s;
+}
+.car-gallery-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--border);
+}
+.car-gallery-thumb { height: 160px; overflow: hidden; }
+.car-gallery-thumb:first-child { border-right: 1px solid var(--border); }
+.car-gallery-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.5s;
+}
+.car-gallery-main:hover img,
+.car-gallery-thumb:hover img { transform: scale(1.04); }
 .spec-groups { display: flex; flex-direction: column; gap: 2rem; }
 .spec-group h3 {
   font-family: var(--font-mono);
@@ -310,6 +324,21 @@ section { padding: 6rem 2rem; }
 
 /* --- LUCCA --- */
 .lucca-section { border-top: 1px solid var(--border); }
+.lucca-photo {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+.lucca-photo img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  max-height: 420px;
+  opacity: 0.9;
+  transition: opacity 0.3s;
+}
+.lucca-photo:hover img { opacity: 1; }
 .lucca-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -572,30 +601,6 @@ footer a { color: var(--accent); text-decoration: none; }
 }
 .facility-card:hover .card-photo img { opacity: 1; }
 
-.specs-visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-  display: block;
-  position: absolute;
-  inset: 0;
-}
-.specs-visual {
-  padding: 0;
-  overflow: hidden;
-}
-.specs-visual .dim-label {
-  position: relative;
-  z-index: 1;
-  background: rgba(10,12,16,0.75);
-  backdrop-filter: blur(8px);
-  margin: 0;
-  padding: 0.75rem 1.5rem;
-  width: 100%;
-  border-top: 1px solid var(--border);
-}
-
 /* --- RESPONSIVE --- */
 @media (max-width: 900px) {
   .specs-layout { grid-template-columns: 1fr; }
@@ -621,8 +626,7 @@ footer a { color: var(--accent); text-decoration: none; }
     <div class="logo">ASL <span>— Hochschule Coburg</span></div>
     <ul>
       <li><a href="#facility">Facility</a></li>
-      <li><a href="#vehicle">Vehicle</a></li>
-      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#vehicle">Model Car</a></li>
       <li><a href="#lucca">LUCCA</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#collaborate">Collaborate</a></li>
@@ -691,13 +695,25 @@ footer a { color: var(--accent); text-decoration: none; }
 <!-- MODEL CAR SPECS -->
 <section id="vehicle" class="specs-section">
   <div class="container">
-    <div class="section-label reveal">02 — Vehicle Platform</div>
+    <div class="section-label reveal">02 — Model Car</div>
     <h2 class="section-title reveal">Model Car</h2>
     <p class="section-desc reveal">Purpose-built 1:6 scale autonomous vehicles with full sensor stacks, edge AI compute, and Ackermann steering.</p>
 
     <div class="specs-layout reveal">
       <div class="specs-visual">
-        <img src="images/car1.jpg" alt="1:6 scale autonomous model car with RealSense D435 camera on top, in the model town">
+        <div class="car-gallery">
+          <div class="car-gallery-main">
+            <img src="images/car3.jpeg" alt="Side profile of the model car showing body, connectors, and OptiTrack markers">
+          </div>
+          <div class="car-gallery-row">
+            <div class="car-gallery-thumb">
+              <img src="images/car1.jpg" alt="Model car on the track in the model town">
+            </div>
+            <div class="car-gallery-thumb">
+              <img src="images/car2.jpeg" alt="Top-down view of the electronics bay: Jetson Orin, EZRUN controller, wiring">
+            </div>
+          </div>
+        </div>
         <div class="dim-label">80 × 40 × 40 cm  ·  ~15 kg  ·  50 cm wheelbase</div>
       </div>
 
@@ -729,99 +745,16 @@ footer a { color: var(--accent); text-decoration: none; }
   </div>
 </section>
 
-<!-- ARCHITECTURE -->
-<section id="architecture">
-  <div class="container">
-    <div class="section-label reveal">03 — Software</div>
-    <h2 class="section-title reveal">Architecture Pipeline</h2>
-    <p class="section-desc reveal">End-to-end ROS 2 Humble architecture spanning sensor input through actuation, with V2X communication and traffic light control.</p>
-
-    <div class="arch-pipeline reveal">
-      <div class="arch-stage">
-        <div class="arch-stage-box">
-          <h4>Sensors</h4>
-          <ul>
-            <li>RealSense D435</li>
-            <li>YDLidar G2</li>
-            <li>OptiTrack MoCap</li>
-            <li>Arduino Giga R1</li>
-          </ul>
-        </div>
-      </div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-stage">
-        <div class="arch-stage-box">
-          <h4>Sense</h4>
-          <ul>
-            <li>ICP Odometry</li>
-            <li>Object Detection</li>
-            <li>Car Description</li>
-            <li>ROS Deep Learning</li>
-          </ul>
-        </div>
-      </div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-stage">
-        <div class="arch-stage-box">
-          <h4>Plan</h4>
-          <ul>
-            <li>AD Localiser</li>
-            <li>Route Planner</li>
-            <li>Trajectory Planner</li>
-            <li>Traffic Signal Planner</li>
-          </ul>
-        </div>
-      </div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-stage">
-        <div class="arch-stage-box">
-          <h4>Act</h4>
-          <ul>
-            <li>V2X Publisher</li>
-            <li>Nav Bringup</li>
-            <li>Map Loader</li>
-            <li>SPaT / CAM Pub</li>
-          </ul>
-        </div>
-      </div>
-      <div class="arch-arrow">→</div>
-      <div class="arch-stage">
-        <div class="arch-stage-box">
-          <h4>Actuators</h4>
-          <ul>
-            <li>Steering Servo (PWM)</li>
-            <li>DC Motor (CAN)</li>
-            <li>Traffic Lights (GPIO)</li>
-            <li>RViz GUI</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <h3 class="reveal" style="font-size:1.05rem; margin-top:3rem; margin-bottom:1rem;">Technology Stack</h3>
-    <div class="stack-row reveal">
-      <span class="stack-chip">ROS 2 Humble</span>
-      <span class="stack-chip">eProsima FastDDS</span>
-      <span class="stack-chip">Ubuntu 22.04</span>
-      <span class="stack-chip">JetPack 6.2</span>
-      <span class="stack-chip">PyTorch</span>
-      <span class="stack-chip">MOCAP4ROS2</span>
-      <span class="stack-chip">ETSI ITS Messages</span>
-      <span class="stack-chip">realsense2_camera</span>
-      <span class="stack-chip">ydlidar</span>
-      <span class="stack-chip">ros_deep_learning</span>
-      <span class="stack-chip">MQTT</span>
-      <span class="stack-chip">SSD-MobileNet-V2</span>
-    </div>
-  </div>
-</section>
-
 <!-- LUCCA -->
 <section id="lucca" class="lucca-section">
   <div class="container">
     <div class="section-label reveal">04 — Full-Scale Platform</div>
     <h2 class="section-title reveal">LUCCA Vehicle</h2>
     <p class="section-desc reveal">In addition to model-scale testing, the lab operates a full-size instrumented vehicle (eGolf) with 5G connectivity and multi-sensor perception.</p>
+
+    <div class="lucca-photo reveal">
+      <img src="images/lucca.png" alt="LUCCA — instrumented eGolf with roof-mounted LiDAR and Coburg branding">
+    </div>
 
     <div class="lucca-grid">
       <div class="lucca-item reveal">
@@ -863,7 +796,7 @@ footer a { color: var(--accent); text-decoration: none; }
   <div class="container">
     <div class="section-label reveal">05 — Research Focus</div>
     <h2 class="section-title reveal">What We Investigate</h2>
-    <p class="section-desc reveal">Three pillars of research — all validated in the physical safety of our model town.</p>
+    <p class="section-desc reveal">Our pillars of research — all validated in the physical safety of our model town.</p>
 
     <div class="research-cards">
       <div class="research-card reveal">
@@ -885,69 +818,14 @@ footer a { color: var(--accent); text-decoration: none; }
 
 </section>
 
-<!-- TEST CASES -->
-<section>
-  <div class="container">
-    <div class="section-label reveal">06 — Scenarios</div>
-    <h2 class="section-title reveal">What You Can Test Here</h2>
-    <p class="section-desc reveal">The model town enables scenarios that are impractical in both simulation and the real world.</p>
-
-    <div class="test-grid">
-      <div class="test-col reveal">
-        <h3>Hard to Simulate</h3>
-        <div class="test-subtitle">Physics & optics that break digital engines</div>
-        <div class="test-item"><div class="test-dot"></div><span>Actuator latency and physical inertia</span></div>
-        <div class="test-item"><div class="test-dot"></div><span>V2X signal corruption</span></div>
-        <div class="test-item"><div class="test-dot"></div><span>Surface grip loss — icy or oily surfaces</span></div>
-        <div class="test-item"><div class="test-dot"></div><span>Complex optics — reflections that mislead LiDAR and cameras</span></div>
-        <div class="test-item"><div class="test-dot"></div><span>Volumetric particles — smoke, dust, snow</span></div>
-        <div class="test-item"><div class="test-dot"></div><span>Sensor blinding — laser attacks and lens flares</span></div>
-      </div>
-      <div class="test-col reveal">
-        <h3>Too Dangerous for Real World</h3>
-        <div class="test-subtitle">Safety-critical edge cases at zero risk</div>
-        <div class="test-item"><div class="test-dot"></div><span>Unavoidable collision — "trolley problem" decision logic</span></div>
-        <div class="test-item"><div class="test-dot"></div><span>Critical hardware failure — sudden loss of steering/braking</span></div>
-        <div class="test-item"><div class="test-dot"></div><span>Severe infrastructure damage — potholes, road collapses</span></div>
-        <div class="test-item"><div class="test-dot"></div><span>Falling heavy cargo — dynamic hazards from other vehicles</span></div>
-        <div class="test-item"><div class="test-dot"></div><span>Multi-vehicle pileups — chain-reaction crash scenarios</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- COLLABORATE -->
 <section id="collaborate" class="collab-section">
   <div class="container">
     <div class="section-label reveal">07 — Get Involved</div>
     <h2 class="section-title reveal">Collaborate With Us</h2>
-    <p class="section-desc reveal">We're actively seeking partners from industry and academia. Here's how we can work together.</p>
+    <p class="section-desc reveal">We're actively seeking partners from industry and academia — for joint research, sponsorship, or anything in between.</p>
 
-    <div class="collab-grid">
-      <div class="collab-card reveal">
-        <span class="collab-emoji">🔬</span>
-        <h3>Joint Research & PhDs</h3>
-        <p>Co-fund PhD candidates and drive joint research projects in autonomous driving, sim2real, and adversarial robustness.</p>
-      </div>
-      <div class="collab-card reveal">
-        <span class="collab-emoji">🤖</span>
-        <h3>Educational Sponsorship</h3>
-        <p>Support with hardware or funding for robots and the launch of our RoboRacer student competition team.</p>
-      </div>
-      <div class="collab-card reveal">
-        <span class="collab-emoji">🎤</span>
-        <h3>Guest Lectures</h3>
-        <p>Share your industry insights with our students. We welcome practitioners and domain experts.</p>
-      </div>
-      <div class="collab-card reveal">
-        <span class="collab-emoji">🏭</span>
-        <h3>Student Excursions</h3>
-        <p>Host our students for site visits and field trips to inspire the next generation of engineers.</p>
-      </div>
-    </div>
-
-    <div style="text-align:center; margin-top: 3rem;" class="reveal">
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">3 permanent lab engineers · Active research phase · Growing team</p>
+    <div class="reveal">
       <a href="mailto:andreas.look@hs-coburg.de" class="btn btn-primary">Get in Touch</a>
     </div>
   </div>
