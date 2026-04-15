@@ -27,4 +27,4 @@ images/
 
 ## Contact
 
-Prof. Dr. Andreas Look — [andreas.look@hs-coburg.de](mailto:andreas.look@hs-coburg.de)
+[andreas.look@hs-coburg.de](mailto:andreas.look@hs-coburg.de)
