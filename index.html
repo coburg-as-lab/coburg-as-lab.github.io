@@ -221,7 +221,6 @@ section { padding: 6rem 2rem; }
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-height: 400px;
 }
 .specs-visual .dim-label {
   font-family: var(--font-mono);
@@ -233,25 +232,12 @@ section { padding: 6rem 2rem; }
   backdrop-filter: blur(8px);
 }
 .car-gallery { display: flex; flex-direction: column; flex: 1; }
-.car-gallery-main { overflow: hidden; height: 250px; }
-.car-gallery-main img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
+.car-gallery img {
+  width: 100%; height: auto;
+  display: block;
   transition: transform 0.5s;
 }
-.car-gallery-row {
-  display: grid; grid-template-columns: 1fr 1fr;
-  border-top: 1px solid var(--border);
-}
-.car-gallery-thumb { height: 160px; overflow: hidden; }
-.car-gallery-thumb:first-child { border-right: 1px solid var(--border); }
-.car-gallery-thumb img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-  transition: transform 0.5s;
-}
-.car-gallery-main:hover img,
-.car-gallery-thumb:hover img { transform: scale(1.04); }
+.car-gallery img:hover { transform: scale(1.04); }
 .spec-groups { display: flex; flex-direction: column; gap: 2rem; }
 .spec-group h3 {
   font-family: var(--font-mono);
@@ -324,55 +310,6 @@ section { padding: 6rem 2rem; }
 
 /* --- LUCCA --- */
 .lucca-section { border-top: 1px solid var(--border); }
-.lucca-photo {
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  margin-bottom: 2.5rem;
-}
-.lucca-photo img {
-  width: 100%;
-  display: block;
-  object-fit: cover;
-  max-height: 420px;
-  opacity: 0.9;
-  transition: opacity 0.3s;
-}
-.lucca-photo:hover img { opacity: 1; }
-.lucca-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.25rem;
-}
-.lucca-item {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem;
-  transition: all 0.3s;
-}
-.lucca-item:hover {
-  background: var(--bg-card-hover);
-  border-color: rgba(232,93,44,0.15);
-}
-.lucca-item h4 {
-  font-size: 0.95rem; font-weight: 600;
-  margin-bottom: 0.4rem;
-}
-.lucca-item p {
-  color: var(--text-muted); font-size: 0.85rem;
-}
-.lucca-item .tech-tag {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--accent);
-  background: var(--accent-glow);
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
-  margin-top: 0.5rem;
-  margin-right: 0.3rem;
-}
 
 /* --- RESEARCH --- */
 .research-cards {
@@ -702,17 +639,8 @@ footer a { color: var(--accent); text-decoration: none; }
     <div class="specs-layout reveal">
       <div class="specs-visual">
         <div class="car-gallery">
-          <div class="car-gallery-main">
-            <img src="images/car3.jpeg" alt="Side profile of the model car showing body, connectors, and OptiTrack markers">
-          </div>
-          <div class="car-gallery-row">
-            <div class="car-gallery-thumb">
-              <img src="images/car1.jpg" alt="Model car on the track in the model town">
-            </div>
-            <div class="car-gallery-thumb">
-              <img src="images/car2.jpeg" alt="Top-down view of the electronics bay: Jetson Orin, EZRUN controller, wiring">
-            </div>
-          </div>
+          <img src="images/car1.jpg" alt="Model car on the track in the model town">
+          <img src="images/car2.jpeg" alt="Top-down view of the electronics bay: Jetson Orin, EZRUN controller, wiring" style="border-top: 1px solid var(--border);">
         </div>
         <div class="dim-label">80 × 40 × 40 cm  ·  ~15 kg  ·  50 cm wheelbase</div>
       </div>
@@ -750,42 +678,28 @@ footer a { color: var(--accent); text-decoration: none; }
   <div class="container">
     <div class="section-label reveal">04 — Full-Scale Platform</div>
     <h2 class="section-title reveal">LUCCA Vehicle</h2>
-    <p class="section-desc reveal">In addition to model-scale testing, the lab operates a full-size instrumented vehicle (eGolf) with 5G connectivity and multi-sensor perception.</p>
 
-    <div class="lucca-photo reveal">
-      <img src="images/lucca.png" alt="LUCCA — instrumented eGolf with roof-mounted LiDAR and Coburg branding">
-    </div>
+    <div class="specs-layout reveal">
+      <div class="specs-visual">
+        <div class="car-gallery">
+          <img src="images/lucca_1.JPEG" alt="LUCCA — instrumented eGolf, front view">
+          <img src="images/lucca_2.JPEG" alt="LUCCA — instrumented eGolf, detail view" style="border-top: 1px solid var(--border);">
+        </div>
+        <div class="dim-label">Volkswagen eGolf  ·  full-size  ·  5G connected</div>
+      </div>
 
-    <div class="lucca-grid">
-      <div class="lucca-item reveal">
-        <h4>360° Reference LiDAR</h4>
-        <p>Ouster LiDAR mounted on roof rack providing full surround point cloud data for ground truth and perception.</p>
-        <span class="tech-tag">Ouster</span>
-      </div>
-      <div class="lucca-item reveal">
-        <h4>Teleoperation Cameras</h4>
-        <p>3× front-facing and 3× additional teleoperation cameras for remote monitoring and driving capabilities.</p>
-        <span class="tech-tag">6× Cameras</span>
-      </div>
-      <div class="lucca-item reveal">
-        <h4>Surround View</h4>
-        <p>4× surround view cameras providing 360° visual coverage around the vehicle via MediaGateway.</p>
-        <span class="tech-tag">4× SVCs</span>
-      </div>
-      <div class="lucca-item reveal">
-        <h4>Scala 2 LiDAR</h4>
-        <p>4× corner-mounted Scala 2 LiDAR sensors for near-field object detection and tracking.</p>
-        <span class="tech-tag">4× Scala 2</span>
-      </div>
-      <div class="lucca-item reveal">
-        <h4>5G Connectivity</h4>
-        <p>5G TCU with dedicated antennas enabling low-latency V2X communication and teleoperation links.</p>
-        <span class="tech-tag">5G TCU</span><span class="tech-tag">V2X</span>
-      </div>
-      <div class="lucca-item reveal">
-        <h4>Compute & Storage</h4>
-        <p>Rack-mounted computing system with dedicated storage array for real-time processing and data logging.</p>
-        <span class="tech-tag">BR-Converter</span>
+      <div class="spec-groups">
+        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);">In addition to model-scale testing, the lab operates a full-size instrumented vehicle (eGolf). With an official autonomous driving license, LUCCA can be used for testing AD algorithms on public roads, full teleoperation, or large-scale data collection campaigns.</p>
+        <div class="spec-group">
+          <h3>LiDAR</h3>
+          <div class="spec-row"><span class="label">Reference LiDAR</span><span class="value">Ouster (roof)</span></div>
+          <div class="spec-row"><span class="label">Corner LiDAR</span><span class="value">4× Scala 2</span></div>
+        </div>
+        <div class="spec-group">
+          <h3>Cameras</h3>
+          <div class="spec-row"><span class="label">Teleoperation</span><span class="value">3× Cameras</span></div>
+          <div class="spec-row"><span class="label">Autonomous Driving</span><span class="value">4× Cameras</span></div>
+        </div>
       </div>
     </div>
   </div>
